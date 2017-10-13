@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.NotiData_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<resultMap id="CashDTOResult" type="CashPoint">
+	    <result property="me_id" column="me_id"/>
+	    <result property="ch_no" column="ch_no"/>
+	    <result property="me_no" column="me_no"/>
+	    <result property="ch_havecash" column="ch_havecash"/>
+
+ 	</resultMap>
+ 	
+	<!-- private String nt_no;//키값
+	private java.util.Date nt_regidate;//날짜
+	private String ad_no;//관리자 키값
+	private String nt_classification;//분류(서비스소식,종료,오픈등등)
+	private String nt_title;//제목
+	private String nt_contents;//내용
+	private String nt_hitcount;//조회수 -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+	<select id="CashPointlist" parameterType="java.util.Map" resultMap="CashDTOResult">
+   <!-- Select distinct p.pd_no,C.CH_NO,c.ch_regidate,c.ch_havecash,p.pd_name,b.bp_price FROM CH_PAYMENT c join me_member m on m.me_no = c.me_no join BP_BUYPRODUCT b on b.me_no = m.me_no join pd_product p on p.PD_NO = b.PD_NO ORDER BY CH_REGIDATE DESC,CH_NO DESC -->  
+<!-- 	 SELECT * FROM CH_PAYMENT c join me_member m on m.me_no = c.me_no join BP_BUYPRODUCT b on b.me_no = m.me_no join pd_product p on p.PD_NO = b.PD_NO ORDER BY CH_REGIDATE DESC,CH_NO DESC  -->  
+<!--   SELECT distinct c.ch_no,c.ch_regidate,c.ch_havecash,mm.mm_minus FROM CH_PAYMENT c join me_member m on m.me_no=c.me_no join MM_MILIAGE MM ON M.ME_NO = MM.ME_NO  ORDER BY CH_REGIDATE DESC,CH_NO DESC  -->
+	Select * FROM CH_PAYMENT C JOIN ME_MEMBER M ON C.ME_NO = M.ME_NO where M.me_no=(select me_no from me_member where me_id= #{me_id}) ORDER BY  CH_NO DESC,CH_REGIDATE DESC
+	</select>
+ 	 <select id="CashView" parameterType="java.util.Map" resultMap="CashDTOResult">
+<!-- 		SELECT M.ME_ID, SUM(C.CH_HAVECASH) CH_HAVECASH FROM  CH_PAYMENT C join ME_MEMBER M ON C.ME_NO = M.ME_NO WHERE M.ME_NO= (select me_no from me_member where me_id = #{me_id})  GROUP BY ME_ID  -->
+  (SELECT m.me_id, (sum(c.ch_havecash) - nvl((select sum(mm_minus) from mm_miliage where me_no = (select me_no from me_member where me_id=#{me_id})), 0)) ch_havecash FROM  CH_PAYMENT C join ME_MEMBER M ON C.ME_NO = M.ME_NO where m.me_no = (select me_no from me_member where me_id=#{me_id}) group by me_id) 
+	</select> 
+<select id="PaymentView" parameterType="java.util.Map" resultMap="CashDTOResult">
+(SELECT m.me_id, (sum(c.ch_havecash)- nvl((select sum(mm_minus) from mm_miliage where me_no = (select me_no from me_member where me_id=#{me_id})), 0)) - (select sum(mm_minus) from mm_miliage where me_no = (select me_no from me_member where me_id=#{me_id}))) ch_havecash FROM  CH_PAYMENT C join ME_MEMBER M ON C.ME_NO = M.ME_NO where m.me_no = (select me_no from me_member where me_id=#{me_id}) group by me_id) 
+	</select> 
+ 	<!-- <update id="NotiDateUpdate"  parameterType="java.util.Map">
+		UPDATE NT_NOTICE SET NT_HITCOUNT=NT_HITCOUNT+1 WHERE NT_NO=#{nt_no}
+	</update>  --> 
+
+           
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

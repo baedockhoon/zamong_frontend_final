@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Candidates_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<resultMap id="CandidatesDTOResult" type="Candidates">
+	    <result property="ca_no" column="ca_no"/>
+	    <result property="ca_regidate" column="ca_regidate"/>
+	    <result property="ss_no" column="ss_no"/>
+	    <result property="at_no" column="at_no"/>
+	    <result property="ma_no" column="ma_no"/>
+ 	</resultMap>
+ 	
+	<!--CA_NO
+	CA_REGIDATE
+	SS_NO
+	AT_NO
+	MA_NO -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+	<select id="Candidateslist" parameterType="java.util.Map" resultMap="CandidatesDTOResult">
+		<!-- SELECT * FROM ca_candidates ORDER BY cA_REGIDATE DESC -->
+		select c.ca_no,c.ca_regidate,s.ss_title,a.at_name 
+		from ca_candidates c join ss_soundsource s on c.ss_no=s.ss_no join at_artist a on c.at_no=a.at_no 
+		join ma_musicaward t on c.ma_no=t.ma_no
+		where t.ma_no=22
+		
+	</select>
+	
+<!-- 	<select id="MusicVideolist_pop" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		SELECT * FROM MV_MUSICVIDEO ORDER BY mv_hitcount desc
+	</select>
+	
+	<select id="MusicVideoView" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		UPDATE MV_MUSICVIDEO SET MV_HITCOUNT=MV_HITCOUNT+1 WHERE MV_NO=#{mv_no}
+		SELECT * FROM MV_MUSICVIDEO WHERE MV_NO=#{mv_no}
+	</select> 
+           
+    <select id="MusicVideoHitcount" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		UPDATE MV_MUSICVIDEO SET MV_HITCOUNT=MV_HITCOUNT+1 WHERE MV_NO=#{mv_no}
+	</select>  -->
+	
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="MusicVideoView" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

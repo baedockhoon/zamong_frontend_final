@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Buyproduct_mybatis.xml">
+	<!--resultMap사용시 column속성 필수  -->
+	
+<!-- 	<resultMap id="AssignDTOResult" type="Assign">
+	    <result property="as_no" column="as_no"/>
+	    <result property="as_regidate" column="as_regidate"/>
+	    <result property="me_no" column="me_no"/>
+	    <result property="al_no" column="al_no"/>
+	    <result property="as_getpoint" column="as_getpoint"/>
+	    <result property="me_id" column="me_id"/>
+	    <result property="avg" column="avg"/>
+	    <result property="count" column="count"/>
+ 	</resultMap> -->
+ 
+ 	
+	<!-- private String nt_no;//키값
+	private java.util.Date nt_regidate;//날짜
+	private String ad_no;//관리자 키값
+	private String nt_classification;//분류(서비스소식,종료,오픈등등)
+	private String nt_title;//제목
+	private String nt_contents;//내용
+	private String nt_hitcount;//조회수 -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+<!--  <select id="Buylist" parameterType="java.util.Map" resultType="BuyProduct">
+		SELECT * FROM BP_BUYPRODUCT
+	</select> -->
+ 	<!-- <select id="NotiDataView" parameterType="BuyproductDTO" resultType="BuyProduct">
+		SELECT * FROM NT_NOTICE WHERE NT_NO=#{nt_no}
+	</select>  --> 
+	
+ 	<!-- <insert id="Assigninsert"  parameterType="Assign">
+		INSERT INTO AS_ASSIGN VALUES(AS_SEQ.NEXTVAL,SYSDATE,#{me_no},#{al_no},#{as_getpoint})
+	</insert> -->
+	<insert id="Assigninsert"  parameterType="Assign">
+		INSERT INTO AS_ASSIGN VALUES(AS_SEQ.NEXTVAL,sysdate,2,#{al_no},#{as_getpoint})
+	</insert>
+	<select id="AssignCount" parameterType="java.util.Map" resultType="int">
+		<!-- SELECT COUNT(AS_GETPOINT) FROM AS_ASSIGN -->
+		SELECT nvl(COUNT(AS_GETPOINT), 0) FROM AS_ASSIGN WHERE AL_NO = #{al_no}
+	</select>
+	<select id="AssignAvg" parameterType="java.util.Map" resultType="float">
+		<!-- SELECT ROUND(AVG(AS_GETPOINT),2) FROM AS_ASSIGN -->
+		SELECT nvl(ROUND(AVG(AS_GETPOINT),2), 0) FROM AS_ASSIGN WHERE AL_NO = #{al_no}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

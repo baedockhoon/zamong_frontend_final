@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis/UserQuestion_mybatis.xml">
+	<!--resultMap사용시 column속성 필수  -->
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+	<select id="soundList" parameterType="java.util.Map" resultType="SoundData">
+		SELECT * FROM (SELECT T.*, ROWNUM R FROM 
+			(SELECT S.*, A.AL_ALBUMNAME, A.AL_ALBUMIMAGE, A.AL_ARTIST, A.AL_ARTISTNO, A.AL_DIVIDE FROM SS_SOUNDSOURCE S JOIN AL_ALBUM A 
+			ON S.AL_NO = A.AL_NO
+			<choose>
+				<when test='ss_genre eq "B"'> WHERE SS_GENRE = '발라드'</when>
+				<when test='ss_genre eq "D"'> WHERE SS_GENRE = '댄스'</when>
+				<when test='ss_genre eq "H"'> WHERE SS_GENRE = '힙합/랩'</when>
+			</choose>
+			ORDER BY SS_REGIDATE DESC) T)
+		WHERE R BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectSoundList" parameterType="java.util.Map" resultType="SoundData">
+		SELECT * FROM SS_SOUNDSOURCE WHERE AL_NO = #{al_no} ORDER BY SS_REGIDATE
+	</select>
+	
+	<select id="selectAlbumOne" parameterType="java.util.Map" resultType="Artist">
+		SELECT * FROM 
+			(SELECT A.*, S.SS_GENRE FROM AL_ALBUM A JOIN SS_SOUNDSOURCE S ON A.AL_NO = S.AL_NO WHERE A.AL_NO = #{al_no} AND ROWNUM = 1) A JOIN 
+			<choose>
+				<when test="al_divide == null">
+					AT_ARTIST G ON A.AL_ARTISTNO = G.AT_NO
+				</when>
+				<otherwise>
+					GP_ATGROUP G ON A.AL_ARTISTNO = G.GP_NO
+				</otherwise>
+			</choose>
+	</select>
+	
+	<select id="selectSoundOne" parameterType="java.util.Map" resultType="SoundData">
+		SELECT S.*, L.LY_CONTENTS, A.AL_ALBUMIMAGE FROM SS_SOUNDSOURCE S JOIN LY_LYLICS L ON S.SS_NO = L.SS_NO JOIN AL_ALBUM A ON S.AL_NO = A.AL_NO WHERE S.SS_NO = #{ss_no}
+	</select>
+	
+	<select id="selectMainPage" parameterType="java.util.Map" resultType="SoundData">
+		SELECT * FROM (SELECT T.*, ROWNUM R FROM 
+			(SELECT * FROM AL_ALBUM ORDER BY AL_REGIDATE DESC) T)
+		WHERE R BETWEEN 1 AND 6
+	</select>
+	
+	
+	
+ <!-- 	<update id="NotiDateUpdate"  parameterType="java.util.Map">
+		UPDATE NT_NOTICE SET NT_HITCOUNT=#{nt_hitcount}+1 WHERE NT_NO=#{nt_no}
+	</update>  --> 
+
+           
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

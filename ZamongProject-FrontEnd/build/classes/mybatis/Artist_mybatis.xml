@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis/UserQuestion_mybatis.xml">
+	<!--resultMap사용시 column속성 필수  -->
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+    <select id="selectGroupOne" parameterType="java.util.Map" resultType="Artist">
+    	SELECT GPM.*, AT_DEBUTSONG, AT_CONTRY FROM 
+    		(SELECT G.*, GM.AT_NO FROM GP_ATGROUP G JOIN GM_GROUPMEMBER GM ON G.GP_NO = GM.GP_NO WHERE G.GP_NO = #{gp_no}) GPM 
+    	JOIN AT_ARTIST A ON GPM.AT_NO = A.AT_NO WHERE ROWNUM = 1
+	</select>
+	
+	<select id="selectArtistList" parameterType="java.util.Map" resultType="Artist">
+		SELECT A.* FROM 
+			(SELECT G.*, GM.AT_NO FROM GP_ATGROUP G JOIN GM_GROUPMEMBER GM ON G.GP_NO = GM.GP_NO WHERE G.GP_NO = #{gp_no}) GPM 
+		JOIN AT_ARTIST A ON GPM.AT_NO = A.AT_NO
+	</select>
+	
+	<select id="selectGenreList" parameterType="java.util.Map" resultType="Artist">
+		SELECT DISTINCT(S.SS_GENRE) FROM 
+			<choose>
+				<when test="al_divide == null">
+					(SELECT AA.*, A.AL_NO FROM AT_ARTIST AA JOIN AL_ALBUM A ON AA.AT_NO = A.AL_ARTISTNO WHERE A.AL_DIVIDE = 'A' AND AA.AT_NO = #{at_no})
+				</when>
+				<otherwise>
+					(SELECT G.*, A.AL_NO FROM GP_ATGROUP G JOIN AL_ALBUM A ON G.GP_NO = A.AL_ARTISTNO WHERE A.AL_DIVIDE = 'G' AND G.GP_NO =  #{gp_no})
+				</otherwise>
+			</choose>
+			GA 
+		JOIN SS_SOUNDSOURCE S ON GA.AL_NO = S.AL_NO
+	</select>
+	
+	<select id="selectArtistOne" parameterType="java.util.Map" resultType="Artist">
+		SELECT * FROM AT_ARTIST WHERE AT_NO = #{at_no}
+	</select>
+	
+	<select id="selectSongList" parameterType="java.util.Map" resultType="Artist">
+		SELECT S.*, AL_ARTIST, AL_ALBUMNAME FROM
+			<choose>
+				<when test="al_divide == null">
+					(SELECT AA.*, A.AL_NO, A.AL_ARTIST, A.AL_ALBUMNAME FROM AT_ARTIST AA JOIN AL_ALBUM A ON AA.AT_NO = A.AL_ARTISTNO WHERE A.AL_DIVIDE = 'A' AND AA.AT_NO = #{at_no})
+				</when>
+				<otherwise>
+					(SELECT G.*, A.AL_NO, A.AL_ARTIST, A.AL_ALBUMNAME FROM GP_ATGROUP G JOIN AL_ALBUM A ON G.GP_NO = A.AL_ARTISTNO WHERE A.AL_DIVIDE = 'G' AND G.GP_NO = #{gp_no})
+				</otherwise>
+			</choose> 
+		GA JOIN SS_SOUNDSOURCE S ON GA.AL_NO = S.AL_NO
+	</select>
+	
+	<!-- <select id="selectAlbumGroupList" parameterType="java.util.Map" resultType="Artist">
+		SELECT * FROM (SELECT GP_NO FROM GM_GROUPMEMBER WHERE AT_NO = #{at_no}) G JOIN AL_ALBUM AL ON G.GP_NO = AL.AL_ARTISTNO
+	</select>
+	
+	<select id="selectAlbumSoloList" parameterType="java.util.Map" resultType="Artist">
+		SELECT * FROM AL_ALBUM WHERE AL_ARTISTNO = #{at_no} AND AL_DIVIDE = 'A'
+	</select>
+	
+	<select id="selectGroupNSolo" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM GM_GROUPMEMBER WHERE AT_NO = #{at_no}
+	</select> -->
+	
+	<select id="selectAlbumList" parameterType="java.util.Map" resultType="SoundData">
+		SELECT AL.* FROM (SELECT GP_NO FROM GM_GROUPMEMBER WHERE AT_NO = #{at_no}) G JOIN AL_ALBUM AL ON G.GP_NO = AL.AL_ARTISTNO WHERE  AL_DIVIDE = 'G'
+		UNION 
+		SELECT * FROM AL_ALBUM WHERE AL_ARTISTNO = #{at_no} AND AL_DIVIDE = 'A'
+	</select>
+	
+</mapper>

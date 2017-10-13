@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Broadcast_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<resultMap id="BroadcastDTOResult" type="Broadcast">
+	    <result property="mv_no" column="mv_no"/>
+	    <result property="mv_regidate" column="mv_regidate" />
+	    <result property="at_no" column="at_no"/>
+	    <result property="ss_no" column="ss_no"/>
+	    <result property="mv_title" column="mv_title"/>
+	    <result property="mv_contents" column="mv_contents"/>
+	    <result property="mv_link" column="mv_link"/>
+	    <result property="mv_hitcount" column="mv_hitcount"/>
+	    <result property="mv_image" column="mv_image"/>
+ 	</resultMap>
+ 	
+	<!-- 	private String mv_no;
+	private java.sql.Date mv_regidate;
+	private String at_no;
+	private String ss_no;
+	private String mv_title;
+	private String mv_contents;
+	private String mv_link;
+	private String mv_hitcount; -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+	<select id="Broadcastlist" parameterType="java.util.Map" resultMap="BroadcastDTOResult">
+		SELECT * FROM Br_Broadcast ORDER BY BR_NO DESC
+	</select>
+	
+	<select id="BroadcastView" parameterType="java.util.Map" resultMap="BroadcastDTOResult">
+		<!-- UPDATE MV_Broadcast SET MV_HITCOUNT=MV_HITCOUNT+1 WHERE MV_NO=#{mv_no} -->
+		SELECT * FROM BR_Broadcast WHERE BR_NO=#{br_no}
+	</select> 
+           
+    <select id="Broadcastlist_pop" parameterType="java.util.Map" resultMap="BroadcastDTOResult">
+	SELECT * FROM BR_Broadcast ORDER BY br_hitcount desc
+	</select>
+	
+	 <select id="BroadcastHitcount" parameterType="java.util.Map" resultMap="BroadcastDTOResult">
+		UPDATE BR_Broadcast SET br_HITCOUNT=br_HITCOUNT+1 WHERE br_NO=#{br_no}
+	</select> 
+	
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="BroadcastView" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.NotiData_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<resultMap id="ChartDTOResult" type="Chart">
+	    <result property="ss_no" column="ss_no"/>
+	    <result property="ss_regidate" column="ss_regidate"/>
+	    <result property="al_no" column="al_no"/>
+	    <result property="ss_title" column="ss_title"/>
+	    <result property="ss_genre" column="ss_genre"/>
+	    <result property="ss_duration" column="ss_duration"/>
+	    <result property="ss_path" column="ss_path"/>
+	    <result property="ss_albumtitle" column="ss_albumtitle"/>
+	    <result property="dn_no" column="dn_no"/>
+	    <result property="dn_regidate" column="dn_regidate"/>
+	    <result property="me_no" column="me_no"/>
+	    <result property="lk_no" column="lk_no"/>
+	    <result property="lk_regidate" column="lk_regidate"/>
+	    <result property="lk_flag" column="lk_flag"/>
+	    <result property="lk_targetno" column="lk_targetno"/>
+
+ 	</resultMap>
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+  
+  	<select id="ChartList" parameterType="java.util.Map" resultType="Chart">
+		select ss.*, al.al_albumimage, al.al_albumname from(
+      select s.*, (NVL2(dn_count, dn_count,'0')+NVL2(lk_count, lk_count,'0')) as count_sum from
+      (select * from ss_soundsource where ss_regidate > (sysdate-(interval '1' month))) s
+      full outer join (select count(*) as dn_count, ss_no from dn_downcount group by ss_no) d
+      on s.ss_no = d.ss_no 
+      full outer join (select count(*) lk_count, lk_targetno as ss_no from lk_like group by lk_targetno) l
+      on s.ss_no = l.ss_no
+      ) ss join al_album al on ss.al_no = al.al_no
+      
+      order by count_sum desc
+	</select>
+  
+  
+           
+           
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.MusicAward_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<!-- <resultMap id="MusicAwardDTOResult" type="MusicAward">
+	    <result property="ma_no" column="ma_no"/>
+	    <result property="ma_regidate" column="ma_regidate"/>
+	    <result property="ma_title" column="ma_title"/>
+	    <result property="ma_contents" column="ma_contents"/>
+	    <result property="ma_endofday" column="ma_endofday"/>
+	    <result property="ss_title" column="ss_title"/>
+	    <result property="at_name" column="at_name"/>
+	    <result property="vt_vote" column="vt_vote"/>
+ 	</resultMap> -->
+ 	
+	<!-- 	MA_NO
+MA_REGIDATE
+MA_TITLE
+MA_CONTENTS
+MA_ENDOFDAY; -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+    <select id="MusicAwardlist" parameterType="java.util.Map" resultType="MusicAward">
+		<!-- SELECT * FROM MA_MUSICAWARD ORDER BY MA_REGIDATE DESC -->
+		select m.*, nvl(v.vt_vote, 0) vt_vote from MA_MUSICAWARD m left outer join (select count(*) vt_vote, ma_no from ca_candidates c join vt_vote v on c.ca_no = v.ca_no group by ma_no) v on m.ma_no = v.ma_no  order by m.ma_no desc
+	</select>
+           
+	<select id="MusicAwardArtistlist" parameterType="java.util.Map" resultType="MusicAward">
+		<!-- SELECT * FROM MA_MUSICAWARD ORDER BY MA_REGIDATE DESC -->
+		select c.ca_no,t.ma_no,t.ma_regidate,t.ma_title,t.ma_endofday,s.ss_title,a.at_name,m.at_image, nvl(v.votecount,0) vt_vote
+		from ca_candidates c 
+		join ss_soundsource s on c.ss_no=s.ss_no 
+		join at_artist a on c.at_no=a.at_no 
+		join ma_musicaward t on c.ma_no=t.ma_no
+    	join AT_ARTIST m on c.at_no=m.at_no
+		FULL OUTER join (select count(*) votecount, CA_NO from vt_vote group by ca_no) v on c.ca_no = v.ca_no
+    	where t.ma_no between '1' and '100' order by t.ma_no desc
+	</select>
+	
+	
+	
+	<insert id="MusicAwardVote" parameterType="java.util.Map">
+		<!-- SELECT * FROM MA_MUSICAWARD ORDER BY MA_REGIDATE DESC -->
+		insert into vt_vote values(vt_vote_seq.nextval,sysdate,44,#{ca_no})
+	</insert>
+	
+<!-- 	<select id="MusicVideolist_pop" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		SELECT * FROM MV_MUSICVIDEO ORDER BY mv_hitcount desc
+	</select>
+	
+	<select id="MusicVideoView" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		UPDATE MV_MUSICVIDEO SET MV_HITCOUNT=MV_HITCOUNT+1 WHERE MV_NO=#{mv_no}
+		SELECT * FROM MV_MUSICVIDEO WHERE MV_NO=#{mv_no}
+	</select> 
+           
+    <select id="MusicVideoHitcount" parameterType="java.util.Map" resultMap="MusicVideoDTOResult">
+		UPDATE MV_MUSICVIDEO SET MV_HITCOUNT=MV_HITCOUNT+1 WHERE MV_NO=#{mv_no}
+	</select>  -->
+	
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="MusicVideoView" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

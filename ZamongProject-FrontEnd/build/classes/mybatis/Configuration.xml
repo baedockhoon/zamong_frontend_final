@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- myBatis 환경설정파일
+     1]데이타베이스 연결정보 설정
+     2]매퍼파일의 위치정보 설정
+ -->
+<configuration>
+	<!--마이바티스에서 사용할 .properties(리소스파일) 설정 -->
+	<properties resource="mybatis/mybatis.properties"/>
+	<!-- 자바빈 별칭:매퍼파일에서 환경설정 파일로 위치됨. -->
+	<typeAliases>
+		<typeAlias alias="NotiData" type="com.zamong.nt.service.NotiDataDTO"/>
+		<typeAlias alias="MusicVideo" type="com.zamong.mv.service.MusicVideoDTO"/>
+		<typeAlias alias="Magazine" type="com.zamong.mg.service.MagazineDTO"/>
+		<typeAlias alias="UserData" type="com.zamong.qu.service.UserQuestionDTO"/>	
+		<typeAlias alias="ProblemData" type="com.zamong.pr.service.ProblemDTO"/>	
+		<typeAlias alias="SoundData" type="com.zamong.ss.service.SoundDTO"/>
+		<typeAlias alias="Comment" type="com.zamong.mg.service.CommentDTO"/>
+		<typeAlias alias="MusicAward" type="com.zamong.ma.service.MusicAwardDTO"/>
+		<typeAlias alias="BuyProduct" type="com.zamong.bp.service.BuyproductDTO"/>
+		<typeAlias alias="CashPoint" type="com.zamong.ch.service.CashDTO"/>
+		<typeAlias alias="Assign" type="com.zamong.as.service.AssignDTO"/>
+		<typeAlias alias="Streaming" type="com.zamong.st.service.StreamingDTO"/>
+		<typeAlias alias="Member" type="com.zamong.me.service.MemberDTO"/>
+		<typeAlias alias="Product" type="com.zamong.pd.service.ProductDTO"/>
+		<typeAlias alias="Minus" type="com.zamong.mm.service.MinusDTO"/>	
+		<typeAlias alias="Artist" type="com.zamong.at.service.ArtistDTO"/>
+		<typeAlias alias="Chart" type="com.zamong.cr.service.ChartDTO"/>
+		<typeAlias alias="Broadcast" type="com.zamong.br.service.BroadcastDTO"/>
+	</typeAliases>
+			<!-- JNDI-->
+			<!-- 커넥션 풀 사용 -->
+<!-- 			<dataSource type="JNDI">
+				<property name="data_source" value="${JNDI_NAME}"/>
+			</dataSource>
+		</environment>
+	</environments>
+ -->			
+	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑) 정보 설정 -->	
+	<mappers>	
+		<mapper resource="mybatis/NotiData_mybatis.xml"/>
+		<mapper resource="mybatis/Musicvideo_mybatis.xml"/>
+		<mapper resource="mybatis/Magazine_mybatis.xml"/>
+		<mapper resource="mybatis/UserQuestion_mybatis.xml"/>
+		<mapper resource="mybatis/Problem_mybatis.xml"/>
+		<mapper resource="mybatis/Sound_mybatis.xml"/>
+		<mapper resource="mybatis/Login_mybatis.xml"/>
+		<mapper resource="mybatis/Comment_mybatis.xml"/>
+		<mapper resource="mybatis/MusicAward_mybatis.xml"/>
+		<mapper resource="mybatis/Buyproduct_mybatis.xml"/>
+		<mapper resource="mybatis/CashPoint_mybatis.xml"/>
+		<mapper resource="mybatis/Assign_mybatis.xml"/>
+		<mapper resource="mybatis/Streaming_mybatis.xml"/>	
+		<mapper resource="mybatis/Minus_mybatis.xml"/>	
+		<mapper resource="mybatis/Artist_mybatis.xml"/>
+		<mapper resource="mybatis/Product_mybatis.xml"/>
+		<mapper resource="mybatis/Chart_mybatis.xml"/>
+		<mapper resource="mybatis/Broadcast_mybatis.xml"/>
+	</mappers>
+</configuration>

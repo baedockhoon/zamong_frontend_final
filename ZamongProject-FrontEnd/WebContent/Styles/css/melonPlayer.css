@@ -1,0 +1,214 @@
+﻿/*
+	version 1.0.1 
+*/
+.mgoonjs {position:relative; width:100%; height:100%; font-family:"돋움",Dotum,"맑은 고딕","Malgun Gothic","Apple Gothic",sans-serif; font-weight:normal; font-size:12px; cursor:pointer; overflow:hidden;}
+
+.mgoonjs .video{position:absolute; top:0px; left:0px;}
+
+.mgoonjs .controlbar{
+	position:relative;
+	display:block;
+	z-index:50;
+/* 	background-color:rgba(255, 255, 255, .5); */
+	opacity:0;
+	visibility:hidden;
+}
+
+.mgoonjs .controlbar .back{height:100%; position:absolute; top:0px;}
+.mgoonjs .controlbar .left{float:left; height:100%; position:relative; display:inline-block;}
+.mgoonjs .controlbar .center{float:left; width:100%; position:relative; display:inline-block; height:100%; margin-right:-100%;}
+.mgoonjs .controlbar .liveBox{float:left; width:100%; position:relative; display:inline-block; height:100%; margin-right:-100%;}
+.mgoonjs .controlbar .right{float:right; position:relative; display:inline-block; height:100%; }
+
+/* .mgoonjs .controlbar .mgoonPlayButton {width: 100%; height:100%; background-image:url(http://do.mgoon.com:8080/skin/skin_image/white/controlbar/play.png); } */
+.mgoonjs .controlbar .background{position:relative; display:inline-block;}
+.mgoonjs .controlbar .button{position:relative; display:inline-block; cursor:pointer;}
+.mgoonjs .controlbar .divider{position:relative;}
+.mgoonjs .controlbar .playButton{}
+.mgoonjs .controlbar .playButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .replayButton{}
+.mgoonjs .controlbar .replayButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .pauseButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .pauseButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .prevButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .nextButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .elapsedBackground{position:relative; outline:none;}
+.mgoonjs .controlbar .durationBackground{position:relative; outline:none;}
+.mgoonjs .controlbar .hdButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .hdButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .ccButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .ccButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .muteButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .muteButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .unmuteButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .unmuteButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .fullscreenButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .fullscreenButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+.mgoonjs .controlbar .normalscreenButton{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .normalscreenButton button{position:relative; display:inline-block; outline:none; background-color:rgba(0,0,0,0); border:none;}
+
+.mgoonjs .controlbar .timeSliderRail{position:absolute; outline:none; width:100%; height:100%; cursor:pointer;}
+.mgoonjs .controlbar .timeSliderBuffer{position:absolute; outline:none; width:100%; height:100%; cursor:pointer;}
+.mgoonjs .controlbar .timeSliderProgress{position:absolute; outline:none; width:100%; height:100%; cursor:pointer;}
+.mgoonjs .controlbar .timeSliderThumb{position:relative; outline:none; cursor:pointer;}
+.mgoonjs .controlbar .waterMark{position:relative; outline:none; float:right; height:100%;}
+.mgoonjs .controlbar .logo{position:relative; outline:none; float:right; height:100%;}
+.mgoonjs .controlbar .live{position:relative; display:inline-block; outline:none; float:left; height:100%;}
+
+.mgoonjs .controlbar .liveText{position:relative; display:inline-block; height:100%; vertical-align:middle; }
+
+.mgoonjs .controlbar .qualityText{position:relative; display:inline-block; float:left; }
+.mgoonjs .controlbar .qualityText .label{position:relative; display:inline-block; text-align:center; vertical-align:middle; width:auto; margin-left:3px; margin-right:3px; overflow:hidden;}
+
+.mgoonjs .controlbar .player-time{position:relative; display:inline-block; width:auto; overflow:hidden; }
+.mgoonjs .controlbar .player-time .time{ vertical-align:middle; width:auto; margin:1px 0 0 0;}
+.mgoonjs .controlbar .player-time.current{position:relative; margin-left:3px; display:inline-block; vertical-align:middle; margin-right:5px;}
+.mgoonjs .controlbar .player-time.duration{margin-left:5px; display:inline-block; vertical-align:middle; position:relative;}
+
+.mgoonjs .display {position:absolute; margin:auto; top:0px; left:0px; right:0px; bottom:0px;}
+.mgoonjs .display .playIcon{background-repeat:no-repeat; background-position:center; position:absolute; display:none; margin:auto; top:0px; left:0px; right:0px; bottom:0px;}
+.mgoonjs .display .bufferIcon{background-repeat:no-repeat; background-position:center; position:absolute; display:none; margin:auto; top:0px; left:0px; right:0px; bottom:0px;/* -webkit-animation: spin 0s infinite linear; animation: spin 0s infinite linear; */}
+.mgoonjs .display .errorIcon{background-repeat:no-repeat; background-position:center; position:absolute; display:none; margin:auto; top:0px; left:0px; right:0px; bottom:0px;}
+.mgoonjs .display .replayIcon{background-repeat:no-repeat; background-position:center; position:absolute; display:none; margin:auto; top:0px; left:0px; right:0px; bottom:0px;}
+.mgoonjs .display .poster{position:absolute; width:100%; height:100%; background-repeat:no-repeat;}
+.mgoonjs .display .errorMsg{position:relative; width:100%; text-align:center;}
+
+.mgoonjs .tooltip {width:1px;}
+.mgoonjs .tooltip .volumeSlider{position:absolute; opacity:0; visibility:hidden;}
+.mgoonjs .tooltip .volumeSliderTop{position:absolute;  }
+.mgoonjs .tooltip .volumeSliderCenter{position:absolute; z-index:10;}
+.mgoonjs .tooltip .volumeSliderBottom{position:absolute; }
+.mgoonjs .tooltip .arrow{position:relative; display:block; margin:0 auto;}
+.mgoonjs .tooltip .background{position:absolute; top:0px; left:0px; z-index:-1;}
+.mgoonjs .tooltip .volumeCapTop{position:absolute; display:block; top:0px; left:0px; }
+.mgoonjs .tooltip .volumeCapBottom{position:absolute; display:block; top:0px; left:0px;}
+.mgoonjs .tooltip .volumeRail{position:absolute; display:block; top:0px; left:0px;}
+.mgoonjs .tooltip .volumeProgress{position:absolute; top:0px; left:0px;}
+.mgoonjs .tooltip .volumeThumb{position:absolute; left:0px;}
+.mgoonjs .tooltip .menuTopHD{}
+.mgoonjs .tooltip .menuTopCC{}
+.mgoonjs .tooltip .menuOption{}
+.mgoonjs .tooltip .menuBottom{}
+.mgoonjs .tooltip .menuOptionActive{}
+
+.mgoonjs .tooltip .capContainer{position:absolute;}
+.mgoonjs .tooltip .qualitycaptop{position:absolute; top:0px; left:0px;}
+.mgoonjs .tooltip .qualitycapcenter{position:absolute;}
+.mgoonjs .tooltip .qualitycapbottom{position:absolute;}
+.mgoonjs .tooltip .captop{position:absolute; display:block; top:0px; left:0px;}
+.mgoonjs .tooltip .capcenter{position:absolute; display:block; top:0px; left:0px;}
+.mgoonjs .tooltip .capbottom{position:absolute; display:block; top:0px; left:0px;}
+
+.mgoonjs .tooltip .timeTip{position:absolute; opacity:0; visibility:hidden; }
+.mgoonjs .tooltip .timeText{position:relative; display:block; width:auto; text-align:center; padding:5px; }
+
+.mgoonjs .tooltip .item{position:absolute; }
+.mgoonjs .tooltip .item .label{position:relative; display:block; width:auto; text-align:center; padding:7px;}
+
+.mgoonjs .artist{position:absolute; top:0px; width:100%; display:block; visibility:hidden; }
+.mgoonjs .artist .container{position:relative; display:block;}
+.mgoonjs .artist .background{position:absolute; display:block; top:0px;}
+.mgoonjs .artist .thumbnail{width:100px; height:100px; background-repeat:no-repeat;}
+.mgoonjs .artist .mask{position:absolute; width:45px; height:45px; border-radius:45px; -webkit-border-radius:45px; -moz-border-radius: 45px; overflow:hidden; z-index:10}
+.mgoonjs .artist .grade{position:relative; float:right; z-index:10;}
+.mgoonjs .artist .grade12{position:relative; float:right;}
+.mgoonjs .artist .grade15{position:relative; float:right;}
+.mgoonjs .artist .grade19{position:relative; float:right;}
+.mgoonjs .artist .gradeAll{position:relative; float:right;}
+.mgoonjs .artist .title{position:absolute; display:block; left:80px; top:14px; width:300px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; z-index:5;}
+.mgoonjs .artist .atristName{position:absolute; display:block; left:80px; top:34px; width:100px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; z-index:5;}
+
+.mgoonjs .relate{position:absolute; display:block; top:0px; left:0px; width:100%; height:100%; z-index:10;}
+.mgoonjs .relate .background{position:relative; display:block; width:100%; height:100%;}
+.mgoonjs .relate .containerArea{position:absolute; display:block; overflow:hidden; z-index:20;}
+.mgoonjs .relate .container{position:absolute; display:block;}
+.mgoonjs .relate .container .item{position:absolute; display:block;}
+.mgoonjs .relate .container .item .img{position:absolute; top:0px; background-repeat:no-repeat;}
+.mgoonjs .relate .container .item .title{position:relative; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; width:10px;}
+.mgoonjs .relate .left{position:absolute; z-index:10;}
+.mgoonjs .relate .right{position:absolute; z-index:10;}
+
+.mgoonjs .banner{position:absolute; display:block; }
+.mgoonjs .banner .background{position:relative;}
+.mgoonjs .banner .closebtn{position:absolute;}
+.mgoonjs .banner .thumbnail{position:absolute;}
+.mgoonjs .banner .thumbBg{position:absolute; width:89px; height:51px; background-color:#000000;}
+.mgoonjs .banner .title{position:absolute;}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(90deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(90deg); transform:rotate(90deg); } }
+
+@-moz-keyframes fadeIn {
+	0% {display:none; opacity: 0; visibility:hidden;}
+	1% {display:block; opacity: 0; visibility:visible;}
+	100% {display:block; opacity: 1; visibility:visible;}
+}
+
+@-moz-keyframes fadeOut {
+	0% {display:none; opacity: 1; visibility:visible;}
+	1% {display:block; opacity: 1; visibility:visible;}
+	100% {display:block; opacity: 0; visibility:hidden;}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {display:none; opacity: 0; visibility:hidden;}
+	1% {display:block; opacity: 0; visibility:visible;}
+	100% {display:block; opacity: 1; visibility:visible;}
+}
+
+@-webkit-keyframes fadeOut {
+	0% {display:none; opacity: 1; visibility:visible;}
+	1% {display:block; opacity: 1; visibility:visible;}
+	100% {display:block; opacity: 0; visibility:hidden;}
+}
+
+@keyframes fadeIn {
+	0% {display:none; opacity: 0; visibility:hidden;}
+	1% {display:block; opacity: 0; visibility:visible;}
+	100% {display:block; opacity: 1; visibility:visible;}
+}
+
+@keyframes fadeOut {
+	0% {display:none; opacity: 1; visibility:visible;}
+	1% {display:block; opacity: 1; visibility:visible;}
+	100% {display:block; opacity: 0; visibility:hidden;}
+}
+
+/* /////////////// */
+
+@-moz-keyframes slideIn {
+	0% {display:none; left:-100px; visibility:hidden;}
+	1% {display:block; left:-100px; visibility:visible;}
+	100% {display:block; left:0px; visibility:visible;}
+}
+
+@-moz-keyframes slideOut {
+	0% {display:none; left:0px; visibility:visible;}
+	1% {display:block; left:0px; visibility:visible;}
+	100% {display:block; left:-100px; visibility:hidden;}
+}
+
+@-webkit-keyframes slideIn {
+	0% {display:none; left:-100px; visibility:hidden;}
+	1% {display:block; left:-100px; visibility:visible;}
+	100% {display:block; left:0px; visibility:visible;}
+}
+
+@-webkit-keyframes slideOut {
+	0% {display:none; left:0px; visibility:visible;}
+	1% {display:block; left:0px; visibility:visible;}
+	100% {display:block; left:-100px; visibility:hidden;}
+}
+
+@keyframes slideIn {
+	0% {display:none; left:-100px; visibility:hidden;}
+	1% {display:block; left:-100px; visibility:visible;}
+	100% {display:block; left:0px; visibility:visible;}
+}
+
+@keyframes slideOut {
+	0% {display:none; left:0px; visibility:visible;}
+	1% {display:block; left:0px; visibility:visible;}
+	100% {display:block; left:-100px; visibility:hidden;}
+}

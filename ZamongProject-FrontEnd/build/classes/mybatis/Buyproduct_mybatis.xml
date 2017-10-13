@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.Buyproduct_mybatis.xml">
+	<!--resultMap사용시 column속성 필수  -->
+	
+ 
+ 	
+	<!-- private String nt_no;//키값
+	private java.util.Date nt_regidate;//날짜
+	private String ad_no;//관리자 키값
+	private String nt_classification;//분류(서비스소식,종료,오픈등등)
+	private String nt_title;//제목
+	private String nt_contents;//내용
+	private String nt_hitcount;//조회수 -->
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+           
+  <select id="Buylist" parameterType="java.util.Map" resultType="BuyProduct">
+      SELECT M.ME_id,B.*,P.PD_NAME FROM ME_MEMBER M JOIN BP_BUYPRODUCT B ON M.ME_NO = B.ME_NO JOIN PD_PRODUCT P ON P.PD_NO = B.PD_NO WHERE P.PD_NO !=3 AND M.ME_NO= (select me_no from me_member where me_id = #{me_id})
+    ORDER BY BP_NO DESC,BP_REGIDATE DESC
+	</select> 
+  <select id="BuyproductView" parameterType="java.util.Map" resultType="BuyProduct">
+    SELECT distinct M.ME_ID FROM ME_MEMBER M JOIN BP_BUYPRODUCT B ON M.ME_NO = B.ME_NO WHERE m.me_no = (select me_no from me_member where me_id = #{me_id})
+		
+	</select>   
+	
+ 	<insert id="insertBuyproduct"  parameterType="BuyProduct">
+		<!-- INSERT INTO BP_BUYPRODUCT VALUES(BP_SEQ.NEXTVAL,SYSDATE,#{pd_no},(select me_no from me_member where me_id = #{me_id}),#{bp_price},1) -->
+		INSERT INTO BP_BUYPRODUCT VALUES(BP_SEQ.NEXTVAL,SYSDATE,#{pd_no},(select me_no from me_member where me_id = #{me_id}),#{bp_price},1)
+	</insert>
+	 <insert id="insertCash"  parameterType="BuyProduct">
+		INSERT INTO CH_PAYMENT VALUES(CH_SEQ.NEXTVAL,SYSDATE,(select me_no from me_member where me_id = #{me_id}),#{ch_havecash})
+<!-- 		INSERT INTO CH_PAYMENT VALUES(CH_SEQ.NEXTVAL,SYSDATE,(select me_no from me_member where me_id =#{me_id}),#{ch_havecash}) -->
+	</insert>
+        <insert id="insertStreaming"  parameterType="BuyProduct">
+		INSERT INTO ST_STREAMING VALUES(ST_SEQ.NEXTVAL,SYSDATE,SYSDATE+30 ,BP_SEQ.CURRVAL,(select me_no from me_member where me_id = #{me_id}))
+		<!-- INSERT INTO ST_STREAMING VALUES(ST_SEQ.NEXTVAL,SYSDATE,SYSDATE+30 ,BP_SEQ.CURRVAL,(select me_no from me_member where me_id =#{me_id})) -->
+	</insert>    
+         <insert id="insertMinus"  parameterType="BuyProduct">
+	INSERT INTO MM_MILIAGE VALUES(MM_MINUS_SEQ.NEXTVAL,(select me_no from me_member where me_id = #{me_id}),#{mm_minus})
+	</insert> 
+	  <insert id="insertMinus1"  parameterType="BuyProduct">
+	INSERT INTO MM_MILIAGE VALUES(MM_MINUS_SEQ.NEXTVAL,(select me_no from me_member where me_id = #{me_id}),#{mm_minus})
+	</insert> 
+    
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>

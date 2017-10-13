@@ -1,0 +1,182 @@
+﻿@charset "utf-8";
+
+/*
+* melon / 2013.07.19 / vi-nyl.com
+* Service : 멜론 공통
+* Creation Date : 2013.07.19
+* Last Update : 
+* Author : 바이널
+*/
+
+h2.f_tit	{margin-bottom:11px;}
+#conts.ban .line_ban 	{padding:0 0 8px;}
+h3.s_title01	{margin-bottom:16px; padding:0 0 4px; font:normal bold 18px/1.25 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#1a1a1a; letter-spacing:-1px;/* border-bottom:1px solid #d9d9d9;*/ } /* 160404 수정 */
+h3.s_title01.mt27	{margin-top:18px;}
+h3.s_title02	{font:normal bold 18px/1.25 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#1a1a1a; letter-spacing:-1px; margin-bottom:11px; width:100%; position:relative;}
+h3.s_title02.mt27	{margin-top:18px;}
+
+/* 160404 추가 */
+.gnr_list{width:1008px; border:0; border-bottom:1px solid #b9b9b9;}
+.gnr_list ul{width:100%;}
+.gnr_list ul li{width:146px;}
+/* 160404 추가 */
+
+/*h3.s_title02 + .data_sorting1 {} /* 방대종 - 타이틀 옆에 sorting select있을 경우, select 선택되지 않는 문제로 */
+h3.s_title02 .s_link	{position:absolute; top:2px; right:5px; *top:10px;}
+h3.s_title02 .s_link a	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_arrow_right.png) no-repeat 100% 2px; background-position:100% 1px\9; *background-position:100% 3px; padding:0 8px 0 0; *padding:0 7px 0 0; font-size:11px; color:#666; font-family:"Dotum", "돋음", "Apple Gothic", sans-serif; display:inline-block; font-weight:normal;}
+h4.s_title01	{font:normal bold 14px/1.25 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#333; letter-spacing:-1px; padding:2px 0 0;}
+@media \0screen {h3.s_title02 .s_link a {background-position:100% 3px;};} /* IE8 */
+
+.recm_album	{width:100%; display:inline-block; vertical-align:top; padding:0 0 11px;} /* 160404 수정 */
+@media \0screen	{.recm_album	{padding:0 0 12px; *padding:0 0 14px;}}
+.recm_album ul	{width:1048px;}
+.recm_album ul li	{margin-left:40px;}
+.recm_album ul li.first_child	{margin-left:40px;}/*140527 수정 lyr*/
+@media \0screen	{.recm_album ul li dl dt	{margin-top:10px;}}
+*+html .recm_album ul li dl .cnt_click	{margin-top:7px;}
+
+.recm_album .l_popup li	{clear:both; margin-left:0;}/* 140513_수정 aty */
+.recm_album .l_popup li.first_child	{margin-right:0; margin-left:0;}/* 140513_수정 aty */
+.recm_album .l_popup ul.list_bullet:after	{content:""; display:block; clear:both; height:0; visibility:hidden;}
+
+.basic_tab01	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_basic_tab.png) repeat-x 0 100%;}
+.basic_tab01 ul	{width:100%; overflow:hidden;}
+.basic_tab01 ul li	{float:left; border:1px solid #d9d9d9; border-bottom:0; background:#f7f7f7; margin:0 -1px 0 0;}
+.basic_tab01 ul li a, .basic_tab01 ul li span	{display:block; width:167px; height:26px; text-align:center; color:#676767; padding:9px 0 0;}
+.basic_tab01 ul li.on	{background:#fff; position:relative; border-color:#bababa;}
+.basic_tab01 ul li.on a, .basic_tab01 ul li.on span	{color:#1b1b1b; font-weight:bold; letter-spacing:-1px; height:27px;}
+
+.data_sorting1	{text-align:right; padding:16px 0 0; width:100%; display:inline-block; vertical-align:top;}
+.data_sorting1 .text1	{font-size:11px; display:inline-block; padding:5px 0 7px;}
+@media \0screen	{.data_sorting1 .text1	{padding:4px 0 8px;};}
+.data_sorting1.mb8 .text1	{font-size:11px; display:inline-block; margin:5px 0 -2px; vertical-align:middle;}
+@media \0screen	{.data_sorting1.mb8 .text1	{margin:4px 0 -1px; *margin:4px 0 0;};}
+.data_sorting1 .link_list	{display:inline-block; padding:1px 7px 0 0; vertical-align:middle;}
+.data_sorting1 .link_list a, .data_sorting1 .link_list strong	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_sorting_bar.png) no-repeat 0 0; color:#666666; padding:0 3px 0 9px;}
+.data_sorting1 .link_list strong	{font-weight:bold; color:#1a1a1a;}
+.data_sorting1 .link_list a.first_child,
+.data_sorting1 .link_list strong.first_child	{background:none;}
+.data_sorting1.mtm55	{position:relative;margin-top:-55px; margin-bottom:8px; display:block;}/* 140410_수정 aty */
+.data_sorting1 .list_sort {display:inline-block; *display:inline; padding-right:2px; vertical-align:middle; *zoom:1;margin-top:5px;*margin-top: 2px} 
+.data_sorting1 .select_wrap {*vertical-align:middle;}
+
+.wrap_btn_l2	{background-color:#f7f7f7; padding:6px 0 6px 8px; border-top:1px solid #d9d9d9;}
+.wrap_btn_l3	{background-color:#f7f7f7; padding:6px 0 6px 8px; border-bottom:1px solid #d9d9d9;}
+
+.classic_album	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_classic_album.png) no-repeat 0 0; width:970px; height:320px; position:relative; display:inline-block; vertical-align:top; padding:27px 0 0 38px;}
+.classic_album h3	{font:normal bold 18px/1.25 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#1a1a1a; letter-spacing:-1px; margin-bottom:16px; padding:0 0 11px; border-bottom:1px solid #ccc;}
+.classic_album .album_list	{float:left; width:606px;}
+.classic_album .album_list h3	{width:574px;}
+.classic_album .album_list .list_clase .list_album12 {margin-left:-32px;} /*140506_수정 aty */
+.classic_album .album_list .list_clase .list_album12:after	{content:""; display:block; clear:both; height:0; visibility:hidden;}/*140506_수정 aty */
+.classic_album .album_list .list_clase .list_album12 li.album12_li {margin-left:32px;}/*140506_수정 aty */
+.classic_album .album_list .list_clase .wrap_album05 dl dt	{margin-top:17px;}
+/*.list_album12 li.album12_li .ellipsis a {color:#555555;}140513_수정 aty */
+
+.album_detail_view	{float:left; width:349px;}
+.album_detail_view h3	{width:326px;}
+.album_detail_view .icon_honor	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_honor.png) no-repeat 0 0; position:absolute; top:6px; right:36px; width:33px; height:48px;}
+.album_detail_view .album_title	{width:256px; position:relative; padding:0 70px 0 0;}
+.album_detail_view .album_title strong	{font-size:14px; font-family:"Dotum", "돋음", "Apple Gothic", sans-serif; color:#1a1a1a; display:block; margin:-1px 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.album_detail_view .album_title span	{display:block; font-size:11px; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.album_detail_view .album_title .detail	{position:absolute; top:1px; right:5px; background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_arrow_right.png) no-repeat 100% 3px; padding:0 8px 0 0; color:#666; letter-spacing:-1px; font-size:11px;}
+.album_detail_view .summary	{border-top:1px solid #d9d9d9; border-bottom:1px solid #d9d9d9; width:326px; overflow:hidden; margin:11px 0 0;}
+.album_detail_view .summary .image	{float:left; width:120px; height:120px;}
+.album_detail_view .summary .image img	{width:120px; height:120px;}
+.album_detail_view .summary ul	{float:right; width:191px; padding:24px 0 0;}
+.album_detail_view .summary ul li	{width:100%; overflow:hidden; margin:0 0 1px;}
+.album_detail_view .summary ul li .thme	{float:left; width:92px;}
+.album_detail_view .summary ul li .clasedesc	{float:left; width:98px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#1a1a1a;}
+.album_detail_view .album_relatelk1 ul	{width:100%; overflow:hidden; margin:19px 0 0;}
+.album_detail_view .album_relatelk1 ul li	{float:left; border-left:1px solid #d9d9d9; padding:0 10px;}
+.album_detail_view .album_relatelk1 ul li.first_child	{border-left:0; padding-left:0;}
+.album_detail_view .album_relatelk1 ul li a	{border:1px solid #d9d9d9; display:inline-block; vertical-align:top;}
+
+.period_album	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_period_box.png) no-repeat 0 0; width:100%; height:163px;}
+.period_album ul	{width:101%; overflow:hidden; padding:0 0 1px;}
+.period_album ul li	{width:333px; height:79px; float:left; padding:2px 2px 1px; margin:0 -1px -1px 0;}
+.period_album ul li a,
+.period_album ul li span	{display:inline-block;}
+.period_album ul li a	{*zoom:1;} /* ie7 */
+.period_album ul li a:after	{content:""; display:block; clear:both; height:0; visibility:hidden;}
+.period_album ul li a.mhover * {text-decoration:underline;}
+.period_album ul li a * {*cursor:pointer;} /* ie7 */
+.period_album ul li .image {background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_cmpsr_list.jpg) no-repeat 0 0; width:118px; height:79px; float:left; overflow:hidden; text-indent:-9999px;}
+.period_album ul li .info {display:block; float:left; width:200px; padding:16px 14px 0 0;}
+.period_album ul li .info .title	{color:#1a1a1a; margin:0 0 3px; display:block;}
+.period_album ul li .info .title strong	{font-weight:bold; margin:0 5px 0 0;}
+.period_album ul li .info .list	{font-size:11px; color:#666; line-height:14px; display:inline-block; vertical-align:top;}
+.period_album ul li.on, .period_album ul li.mhover	{border:2px solid #81ba16; padding:0; width:333px; height:78px; position:relative; z-index:1;}
+.period_album ul li.on .image, .period_album ul li.mhover .image	{width:118px; height:78px;}
+.period_album ul li.cmpsr1 .image	{background-position:0 0;}
+.period_album ul li.cmpsr1.on .image, .period_album ul li.cmpsr1.mhover .image	{background-position:0 -79px;}
+.period_album ul li.cmpsr2 .image	{background-position:-118px 0;}
+.period_album ul li.cmpsr2.on .image, .period_album ul li.cmpsr2.mhover .image	{background-position:-118px -79px;}
+.period_album ul li.cmpsr3 .image	{background-position:-236px 0;}
+.period_album ul li.cmpsr3.on .image, .period_album ul li.cmpsr3.mhover .image	{background-position:-236px -79px;}
+.period_album ul li.cmpsr4 .image	{background-position:-354px 0;}
+.period_album ul li.cmpsr4.on .image, .period_album ul li.cmpsr4.mhover .image	{background-position:-354px -79px;}
+.period_album ul li.cmpsr5 .image	{background-position:-472px 0;}
+.period_album ul li.cmpsr5.on .image, .period_album ul li.cmpsr5.mhover .image	{background-position:-472px -79px;}
+.period_album ul li.cmpsr6 .image	{background-position:-590px 0;}
+.period_album ul li.cmpsr6.on .image, .period_album ul li.cmpsr6.mhover .image	{background-position:-590px -79px;}
+
+.eng_sortorder	{margin:21px 0 0;} /* 160404 수정 */
+.eng_sortorder ol li.eng_sortorder_li	{width:100%; overflow:hidden; border-bottom:1px solid #ebf0ef; margin:0 0 12px;}
+.eng_sortorder ol li.eng_sortorder_li strong	{font:normal bold 14px/1.25 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#333; display:block; margin:0 0 13px;}
+.eng_sortorder ol li.eng_sortorder_li ul	{margin-left:-18px; width:1058px; *margin-bottom:12px;}
+.eng_sortorder ol li.eng_sortorder_li ul li	{float:left; width:327px; overflow:hidden; padding:0 0 0 17px; margin:0 0 16px; border-left:1px solid #ebf0ef;}
+.eng_sortorder ol li.eng_sortorder_li ul li .image	{float:left; border:1px solid #d9d9d9; width:52px; height:52px; margin:0 8px 0 0;}
+.eng_sortorder ol li.eng_sortorder_li ul li .image img	{width:52px; height:52px;}
+.eng_sortorder ol li.eng_sortorder_li ul li .user_name	{float:left; width:260px; padding:10px 0 0;}
+.eng_sortorder ol li.eng_sortorder_li ul li .user_name a	{width:100%; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.eng_sortorder ol li.eng_sortorder_li ul li .user_name a.eng	{color:#1a1a1a; margin:0 0 1px;}
+.eng_sortorder ol li.eng_sortorder_li ul li .user_name a.kor	{color:#666; font-size:11px;}
+
+.prsn_detail	{position:relative; border:1px solid #d9d9d9; width:1006px; overflow:hidden;}
+.prsn_detail .image	{float:left; border-right:1px solid #d9d9d9; width:146px; height:146px; margin:0 15px 0 0;}
+.prsn_detail .image img	{width:146px; height:146px;}
+/* .prsn_detail .detail	{float:left; width:844px; padding:13px 0 0;} */
+.prsn_detail .detail	{float:left; width:844px; padding:13px 0 40px;} /* 130923 daejin */
+.prsn_detail .detail .group_name	{font-size:11px; background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_arrow_right.png) no-repeat 100% 1px; padding:0 8px 0 0; color:#666;}
+.prsn_detail .detail dl	{width:100%; position:relative;}
+.prsn_detail .detail dl dt	{font:normal bold 18px/1 "맑은 고딕","Malgun Gothic",dotum,"돋움", "Apple Gothic", sans-serif; color:#1a1a1a; margin:0 0 14px;}
+.prsn_detail .detail dl dt span	{font-family:"Dotum", "돋음", "Apple Gothic", sans-serif; font-size:11px; font-weight:normal; color:#666;}
+.prsn_detail .detail dl dt a.mhover span	{text-decoration:underline;}
+.prsn_detail .detail dl dd	{letter-spacing:-1px; line-height:20px; padding:0 20px 0 0;}
+.prsn_detail .detail dl dd.sumry1	{overflow:hidden;}
+.prsn_detail .detail dl dd.sumry2	{margin:0 0 20px; display:none;}
+.prsn_detail .detail dl dd .view_more	{position:absolute; top:84px; right:16px; color:#666; background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_arrow_bottom.png) no-repeat 100% 2px; background-position:100% 1px\9; font-size:11px; letter-spacing:-1px; padding:0 17px 0 0;}
+@media \0screen {.prsn_detail .detail dl dd .view_more	{background-position:100% 2px;};} /* IE8 */
+*+html .prsn_detail .detail dl dd .view_more	{background-position:100% 3px;}
+.prsn_detail .detail .btn_text {position:absolute; bottom:16px; right:16px;}
+
+.list_album11 {border-top:0;}
+.list_album11:after {content:""; display:block; clear:both; height:0; visibility:hidden;}
+
+.cmpsr_tylk	{border:1px solid #dedede; width:998px; padding:0 0 0 8px; margin:12px 0 0; background:#fafafa;}
+.cmpsr_tylk ul	{width:100%; display:inline-block; vertical-align:top;}
+.cmpsr_tylk ul li	{float:left; border-left:1px solid #ebf0ef; width:231px; height:167px; overflow:hidden; padding:24px 0 0 16px;}
+.cmpsr_tylk ul li.first_child	{border-left:0; width:230px;}
+.cmpsr_tylk ul li .cmpsr_info	{margin:0 0 13px;}
+.cmpsr_tylk ul li .image	{display:inline-block; width:94px; height:94px; border:1px solid #d9d9d9; vertical-align:middle; margin:0 10px 0 0;}
+.cmpsr_tylk ul li .name	{display:inline-block; width:110px; vertical-align:middle; font-size:11px; color:#666;}
+.cmpsr_tylk ul li .name strong	{display:block; color:#1a1a1a; font-size:14px;}
+.cmpsr_tylk ul li .cmpsr_sumry	{letter-spacing:-1px; line-height:20px;}
+
+.themalk_link	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_theme_child.png) no-repeat 0 0; width:1008px; height:72px;}
+.themalk_link ul	{width:100%; display:inline-block; vertical-align:top;}
+.themalk_link ul li	{float:left; width:169px; margin-right:-1px;}
+.themalk_link ul li a, .themalk_link ul li .wrap	{display:block; width:165px; height:68px; padding:2px;}
+.themalk_link ul li .image	{background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_themalk_link.png) no-repeat 0 0; width:85px; height:68px; float:left; overflow:hidden; text-indent:-9999px;}
+.themalk_link ul li .text	{float:left; margin:27px 0 0; background:url(http://cdnimg.melon.co.kr/resource/image/web/genre/bg_themalk_arrow.png) no-repeat 100% 4px; padding:0 11px 0 0;}
+.themalk_link ul li a.mhover .text	{color:#1a1a1a; text-decoration:underline;}
+.themalk_link ul li.on	{position:relative;}
+.themalk_link ul li.on a, .themalk_link ul li a.mhover, .themalk_link ul li .wrap	{border:2px solid #739900; padding:0;}
+.themalk_link ul li.on .text	{color:#1a1a1a; font-weight:bold;}
+.themalk_link ul li.themalk1 .image	{background-position:-2px -2px;}
+.themalk_link ul li.themalk2 .image	{background-position:-171px -2px;}
+.themalk_link ul li.themalk3 .image	{background-position:-339px -2px;}
+.themalk_link ul li.themalk4 .image	{background-position:-507px -2px;}
+.themalk_link ul li.themalk5 .image	{background-position:-675px -2px;}
+.themalk_link ul li.themalk6 .image	{background-position:-843px -2px;}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace속성:매퍼파일의 완전한경로 .xml는 생략 -->
+<!-- ※ibatis와는 다르게 id값에 .(dot)를 사용 못한다. -->
+<mapper namespace="mybatis.NotiData_mybatis">
+	<!--resultMap사용시 column속성 필수  -->
+	<resultMap id="MagazineDTOResult" type="Magazine">
+	    <result property="mg_no" column="mg_no"/>
+	    <result property="mg_regidate" column="mg_regidate"/>
+	    <result property="mg_title" column="mg_title"/>
+	    <result property="mg_contents" column="mg_contents"/>
+	    <result property="mg_division" column="mg_division"/>
+	    <result property="mg_hitcount" column="mg_hitcount"/>
+ 	</resultMap>
+	
+	
+	
+ 	<!-- id속성에 지정한 값을 자바코드(DAO계열 클래스)에서 
+           식별자로 사용 -->
+    
+   <select id="MagazineList" parameterType="java.util.Map" resultMap="MagazineDTOResult">
+	<!-- SELECT * FROM MG_MAGAZINE ORDER BY MG_NO DESC -->
+	SELECT * FROM (SELECT T.*, ROWNUM R FROM (SELECT * FROM MG_MAGAZINE
+	<!-- <if test="searchColumn != null">
+		WHERE ${searchColumn} LIKE '%' || searchWord || '%'
+	</if> -->
+	ORDER BY MG_NO DESC) T) WHERE R BETWEEN #{start} AND #{end}
+	
+  </select>
+  
+  <select id="MagazineList_Today" parameterType="java.util.Map" resultMap="MagazineDTOResult">
+	<!-- SELECT * FROM MG_MAGAZINE ORDER BY MG_NO DESC -->
+	SELECT * FROM (SELECT T.*, ROWNUM R FROM (SELECT * FROM MG_MAGAZINE WHERE TO_CHAR(MG_REGIDATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	<!-- <if test="searchColumn != null">
+		  WHERE ${searchColumn} LIKE '%' || searchWord || '%'
+		 </if> 
+	-->
+	ORDER BY MG_NO DESC) T) WHERE R BETWEEN #{start} AND #{end}
+	
+  </select>
+  
+   <select id="MagazineTotal" parameterType="java.util.Map" resultType="int">
+  	SELECT COUNT(*) FROM MG_MAGAZINE
+	<!-- <if test="searchColumn != null">
+		  WHERE ${searchColumn} LIKE '%' || searchWord || '%'
+		 </if> 
+	-->
+  </select>
+  
+  	<select id="MagazineView" parameterType="java.util.Map" resultMap="MagazineDTOResult">
+		SELECT * FROM MG_MAGAZINE WHERE MG_NO=#{mg_no}
+	</select>
+
+    <update id="MagazineCount" parameterType="java.util.Map">
+		UPDATE MG_MAGAZINE SET MG_HITCOUNT=MG_HITCOUNT+1 WHERE MG_NO=#{mg_no}
+	</update>
+           
+           
+       <!--     
+           
+ 	<select id="ReplyBBSLogin" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE ID=#{id} AND PWD=#{pwd}	
+	</select>
+	
+	<select id="ReplyBBStotal" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM REPLYBBS RE JOIN MEMBER M ON RE.ID=M.ID 
+	</select>
+	<insert id="ReplyBBSinsert" parameterType="ReplyBBSDto">
+		INSERT INTO REPLYBBS(NO,ID,TITLE,CONTENT,REFER) VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SEQ_REPLYBBS.CURRVAL)
+	</insert>
+	<select id="ReplyBBSone" parameterType="java.util.Map" resultType="ReplyBBSDto">
+		SELECT RE.*,NAME FROM MEMBER M JOIN REPLYBBS RE ON M.ID=RE.ID WHERE NO=#{no}
+	</select>
+	<update id="ReplyBBSupdate" parameterType="ReplyBBSDto">
+		UPDATE REPLYBBS SET TITLE=#{title},CONTENT=#{content} WHERE NO=#{no}
+	</update>
+	<delete id="ReplyBBSdelete" parameterType="ReplyBBSDto">
+		DELETE REPLYBBS WHERE NO=#{no}
+	</delete>
+	<update id="ReplyBBSreply_update" parameterType="java.util.Map">
+		UPDATE REPLYBBS SET STEP=STEP+1 WHERE REFER=#{refer} AND STEP &gt; #{step}
+	</update>
+	<insert id="ReplyBBSreply_insert" parameterType="java.util.Map">
+		INSERT INTO REPLYBBS VALUES(SEQ_REPLYBBS.NEXTVAL,#{id},#{title},#{content},SYSDATE,#{refer},#{step}+1,#{depth}+1)
+	</insert> -->
+</mapper>
